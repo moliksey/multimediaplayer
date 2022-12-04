@@ -27,7 +27,8 @@ function plusMusic(n){
     let song = document.getElementsByClassName("audio");
     let t=song[songNumber-1].volume;
     song[songNumber-1].pause();
-
+    let currentSongName=document.getElementById("songName"+songNumber)
+    currentSongName.style.display= "none";
     nextSong(songNumber+=n,t);
 }
 function nextSong(n, t){
@@ -42,6 +43,8 @@ function nextSong(n, t){
     song[songNumber-1].currentTime = 0;
     song[songNumber-1].style.display = "block";
     song[songNumber-1].volume=t;
+    let currentSongName=document.getElementById("songName"+songNumber)
+    currentSongName.style.display= "inline-block";
 }
 function playSong(){
     let song=document.getElementsByClassName("audio");
@@ -81,7 +84,10 @@ function visualiseAndPLay(){
     }
     animate();
 };
-
+function switchVolume(n){
+    const audio1=document.getElementById('audio'+songNumber);
+    audio1.volume=n/100;
+}
 /*file.addEventListener('change', function play (){
     debugger;
     if(!audioCtx)
@@ -114,9 +120,9 @@ function visualiseAndPLay(){
 function drawVisualiser(bufferLength,x,barWidth,barHeight, dataArray){
     for(let i=0; i<bufferLength; i++){
         barHeight=dataArray[i];
-        const red=i*barHeight/20;
+        const red=i*barHeight/4;
         const green=i*4;
-        const blue=barHeight/4;
+        const blue=barHeight/2;
         ctx.fillStyle='rgb('+red+','+green+','+blue+')';
         ctx.fillRect(x,canvas.height-barHeight, barWidth, barHeight);
         x+=barWidth;

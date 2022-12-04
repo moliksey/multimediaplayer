@@ -6,7 +6,6 @@
     <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body onload="currentSlide(1);  nextSong(1,0.1); ">
-<a href="music.html">Музыка</a>
 <div class="slideshow-container">
 
     <!-- Full-width images with number and caption text -->
@@ -41,11 +40,11 @@
     <span class="dot" onclick="currentSlide(2)"></span>
     <span class="dot" onclick="currentSlide(3)"></span>
 </div>
-<div style="text-align:center " class="buttons">
+<div style="/*text-align:center*/ " class="buttons">
     <button class="play-slideshow" id="play" onclick="playSlideshow()"></button>
     <button class="pause-slideshow" id="stop" onclick="pauseSlideshow()"></button>
     <div class="slider">
-        <input type="range" style="display: inline-block" min="1000" max="10000" value="5000" id="fader"
+        <input type="range" style="/*display: inline-block*/" min="1000" max="10000" value="5000" id="fader"
                step="1000" onchange="switchTimer(value)" oninput="rangeValue.innerText = this.value/1000+' сек'">
         <datalist id="volsettings">
             <option>0</option>
@@ -76,9 +75,27 @@
         <source src="./music3.mp3" type="audio/mp3">
     </audio>
     <button style="display: inline-block" onclick="plusMusic(1)">next</button>
+    <p id="songName1" style="display: inline-block">Beliver</p>
+    <p id="songName2" style="display: none">Enemy</p>
+    <p id="songName3" style="display: none">Natural</p>
+    <input type="range" style="/*display: inline-block*/" min="1000" max="10000" value="5000" id="volume"
+           step="1000" onchange="switchVolume(value)" >
+    <datalist id="volsettings">
+        <option>0</option>
+        <option>1000</option>
+        <option>2000</option>
+        <option>3000</option>
+        <option>4000</option>
+        <option>5000</option>
+        <option>6000</option>
+        <option>7000</option>
+        <option>8000</option>
+        <option>9000</option>
+        <option>10000</option>
+    </datalist>
     <div class="circle"></div>
     <div id="containerMusic">
-        <canvas id="canvas1"></canvas>
+        <canvas id="canvas1" ></canvas>
         <audio id="audio1" src="music1.mp3" controls></audio>
 
     </div>

@@ -41,7 +41,8 @@
 .slider{
     position: absolute;
     bottom: 0;
-    left: 40%;
+    left: 45%;
+
 }
 /* Caption text */
 .text {
@@ -77,7 +78,8 @@
 #play {
     position: absolute;
     top: 0;
-    left: 45%;
+
+    left: 47%;
     cursor: pointer;
     display: inline-block;
     width: 30px;
@@ -91,11 +93,13 @@
 .buttons{
     position: relative;
     height: 60px;
+    text-align: center;
 }
 #stop {
     position: absolute;
     top: 0;
-    left: 52%;
+
+    right: 46%;
     cursor: pointer;
     display: inline-block;
     width: 30px;

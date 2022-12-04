@@ -78,7 +78,7 @@ function visualiseAndPLay(){
     animate();
 };
 
-file.addEventListener('change', function play (){
+/*file.addEventListener('change', function play (){
     debugger;
     if(!audioCtx)
         getContext();
@@ -106,7 +106,7 @@ file.addEventListener('change', function play (){
         requestAnimationFrame(animate);
     }
     animate();
-})
+})*/
 function drawVisualiser(bufferLength,x,barWidth,barHeight, dataArray){
     for(let i=0; i<bufferLength; i++){
         barHeight=dataArray[i];

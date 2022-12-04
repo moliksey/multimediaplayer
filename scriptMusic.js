@@ -29,7 +29,7 @@ play.addEventListener('click', function (){
     analyser=audioCtx.createAnalyser();
     audioSrc.connect(analyser);
     analyser.connect(audioCtx.destination);
-    analyser.fftSize=64;
+    analyser.fftSize=128;
     const bufferLength=analyser.frequencyBinCount;
     const dataArray=new Uint8Array(bufferLength);
     const barWidth=canvas.width/bufferLength;

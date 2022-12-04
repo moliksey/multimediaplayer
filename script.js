@@ -4,7 +4,7 @@ let timer=5000;
 let timerId;
 let mediaSource=[];
 //const file=document.getElementById('fileupload');
-const play=document.getElementById('play');
+
 let audioCtx;
 function getContext(){
     audioCtx =new(window.AudioContext||window.webkitAudioContext)();
@@ -120,7 +120,7 @@ function switchVolume(n){
 function drawVisualiser(bufferLength,x,barWidth,barHeight, dataArray){
     for(let i=0; i<bufferLength; i++){
         barHeight=dataArray[i];
-        const red=i*barHeight/2;
+        const red=i*barHeight;
         const green=i*4;
         const blue=barHeight;
         ctx.fillStyle='rgb('+red+','+green+','+blue+')';
@@ -136,10 +136,19 @@ function switchTimer(n){
     timer=n;
 }
 function playSlideshow() {
+    let play=document.getElementById('play');
+    play.style.display="none";
+    let stop=document.getElementById('stop');
+    stop.style.display="inline-block";
     timerId=setInterval(()=>(plusSlides(1)),timer);
 
 }
 function pauseSlideshow(){
+    let stop=document.getElementById('stop');
+    stop.style.display="none";
+    let play=document.getElementById('play');
+    play.style.display="inline-block";
+
     clearInterval(timerId);
 
 

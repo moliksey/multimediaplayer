@@ -19,7 +19,7 @@ let analyser;
 let client = new XMLHttpRequest();
 
 
-/*container.addEventListener('click', function (){
+play.addEventListener('click', function (){
     const audio1=document.getElementById('audio1');
     audio1.src='music1.mp3';
     if(!audioCtx)
@@ -43,7 +43,7 @@ let client = new XMLHttpRequest();
         requestAnimationFrame(animate);
     }
     animate();
-});*/
+});
 
 file.addEventListener('change', function play (){
     debugger;

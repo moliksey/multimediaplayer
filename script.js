@@ -86,7 +86,7 @@ function visualiseAndPLay(){
 };
 function switchVolume(n){
     const audio1=document.getElementById('audio'+songNumber);
-    audio1.volume=n/100;
+    audio1.volume=n/10000;
 }
 /*file.addEventListener('change', function play (){
     debugger;
@@ -122,7 +122,7 @@ function drawVisualiser(bufferLength,x,barWidth,barHeight, dataArray){
         barHeight=dataArray[i];
         const red=i*barHeight/4;
         const green=i*4;
-        const blue=barHeight/2;
+        const blue=barHeight;
         ctx.fillStyle='rgb('+red+','+green+','+blue+')';
         ctx.fillRect(x,canvas.height-barHeight, barWidth, barHeight);
         x+=barWidth;

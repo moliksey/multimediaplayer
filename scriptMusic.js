@@ -2,7 +2,7 @@ let audio2=new Audio();
 audio2.src='music1.mp3';
 let audio3=new Audio();
 audio3.src='music1.mp3';
-
+let songNumber=1;
 const file=document.getElementById('fileupload');
 const play=document.getElementById('play');
 let audioCtx
@@ -20,8 +20,8 @@ let client = new XMLHttpRequest();
 
 
 play.addEventListener('click', function (){
-    const audio1=document.getElementById('audio1');
-    audio1.src='music1.mp3';
+    const audio1=document.getElementById('audio'+songNumber);
+    audio1.src='music'+songNumber+'.mp3';
     if(!audioCtx)
         getContext();
     audio1.play().then(r => (console.log('play')));
@@ -29,7 +29,7 @@ play.addEventListener('click', function (){
     analyser=audioCtx.createAnalyser();
     audioSrc.connect(analyser);
     analyser.connect(audioCtx.destination);
-    analyser.fftSize=128;
+    analyser.fftSize=64;
     const bufferLength=analyser.frequencyBinCount;
     const dataArray=new Uint8Array(bufferLength);
     const barWidth=canvas.width/bufferLength;

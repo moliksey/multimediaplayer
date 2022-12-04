@@ -45,16 +45,16 @@ function nextSong(n, t){
 function playSong(){
     let song=document.getElementsByClassName("audio");
     if(song[songNumber-1].paused){
-         visualiseAndPLay(song[songNumber-1]);
+         visualiseAndPLay();
     }else{
         song[songNumber-1].pause();
     }
 
 }
 
-function visualiseAndPLay(song){
-    debugger
-    const audio1=song;
+function visualiseAndPLay(){
+    const audio1=document.getElementById('audio'+songNumber);
+    audio1.src='music'+songNumber+'.mp3';
     if(!audioCtx)
         getContext();
     audio1.play().then(r => (console.log('play')));
@@ -78,6 +78,35 @@ function visualiseAndPLay(song){
     animate();
 };
 
+file.addEventListener('change', function play (){
+    debugger;
+    if(!audioCtx)
+        getContext();
+    const files=this.files;
+
+    const audio1=document.getElementById('audio1');
+    audio1.src=URL.createObjectURL(files[0]);
+    audio1.load();
+    audio1.play();
+    audioSrc=audioCtx.createMediaElementSource(audio1);
+    analyser=audioCtx.createAnalyser();
+    audioSrc.connect(analyser);
+    analyser.connect(audioCtx.destination);
+    analyser.fftSize=128;
+    const bufferLength=analyser.frequencyBinCount;
+    const dataArray=new Uint8Array(bufferLength);
+    const barWidth=canvas.width/bufferLength;
+    let barHeight;
+    let x;
+    function animate(){
+        x=0;
+        ctx.clearRect(0,0, canvas.width, canvas.height);
+        analyser.getByteFrequencyData(dataArray);
+        drawVisualiser(bufferLength,x,barWidth,barHeight, dataArray)
+        requestAnimationFrame(animate);
+    }
+    animate();
+})
 function drawVisualiser(bufferLength,x,barWidth,barHeight, dataArray){
     for(let i=0; i<bufferLength; i++){
         barHeight=dataArray[i];

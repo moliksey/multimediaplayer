@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Стили</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body onload="currentSlide(1);  nextSong(1,0.1); ">
+<a href="music.html">Музыка</a>
+<script src="./script.js"></script>
+<div class="slideshow-container">
+
+    <!-- Full-width images with number and caption text -->
+    <div class="mySlides fade">
+        <div class="numbertext">1 / 3</div>
+        <img src="img1.jpg" style="width:100%">
+        <div class="text">Caption Text</div>
+
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">2 / 3</div>
+        <img src="img2.jpg" style="width:100%">
+        <div class="text">Caption Two</div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">3 / 3</div>
+        <img src="img3.jpg" style="width:100%">
+        <div class="text">Caption Three</div>
+    </div>
+
+    <!-- Next and previous buttons -->
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+<br>
+
+<!-- The dots/circles -->
+<div style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+</div>
+<div style="text-align:center " class="buttons">
+    <button class="play-slideshow" id="play" onclick="playSlideshow()"></button>
+    <button class="pause-slideshow" id="stop" onclick="pauseSlideshow()"></button>
+    <div class="slider">
+        <input type="range" style="display: inline-block" min="1000" max="10000" value="5000" id="fader"
+               step="1000" onchange="switchTimer(value)" oninput="rangeValue.innerText = this.value/1000+' сек'">
+        <datalist id="volsettings">
+            <option>0</option>
+            <option>1000</option>
+            <option>2000</option>
+            <option>3000</option>
+            <option>4000</option>
+            <option>5000</option>
+            <option>6000</option>
+            <option>7000</option>
+            <option>8000</option>
+            <option>9000</option>
+            <option>10000</option>
+        </datalist>
+        <div id="rangeValue" style="display: inline-block"> 5 сек</div>
+    </div>
+</div>
+<div>
+    <button style="display: inline-block" onclick="plusMusic(-1)">back</button>
+    <button style="display: inline-block" onclick="playSong(); ">play</button>
+    <audio class="audio">
+        <source src="./music1.mp3" type="audio/mp3" >
+    </audio>
+    <audio  class="audio">
+        <source src="./music2.mp3" type="audio/mp3">
+    </audio>
+    <audio class="audio">
+        <source src="./music3.mp3" type="audio/mp3">
+    </audio>
+    <button style="display: inline-block" onclick="plusMusic(1)">next</button>
+    <div class="circle"></div>
+</div>
+</body>
+</html>

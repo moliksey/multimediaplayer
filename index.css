@@ -115,7 +115,7 @@
     animation-duration: 1.5s;
 }
 audio{
-    /*display: none;*/
+    display: none;
 }
 @keyframes fade {
     from {opacity: .4}

@@ -66,7 +66,7 @@ function visualiseAndPLay(){
     analyser=audioCtx.createAnalyser();
     audioSrc.connect(analyser);
     analyser.connect(audioCtx.destination);
-    analyser.fftSize=64;
+    analyser.fftSize=256;
     const bufferLength=analyser.frequencyBinCount;
     const dataArray=new Uint8Array(bufferLength);
     const barWidth=canvas.width/bufferLength;

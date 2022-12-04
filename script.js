@@ -1,16 +1,23 @@
-let context;
-    let analyser,src, array;
 let slideIndex = 1;
 let songNumber=1
 let timer=5000;
 let timerId;
-
+const file=document.getElementById('fileupload');
+const play=document.getElementById('play');
+let audioCtx
+function getContext(){
+    audioCtx =new(window.AudioContext||window.webkitAudioContext)();
+    console.log(audioCtx);}
+//const container=document.getElementById('containerMusic');
+const canvas=document.getElementById('canvas1');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+const ctx=canvas.getContext('2d');
+let audioSrc;
+let analyser;
+let client = new XMLHttpRequest();
 showSlides(slideIndex);
 
-function makeContext(){
-    if(!context)
-    context= new AudioContext();
-}
 
 function plusSlides(n) {
     showSlides(slideIndex += n);
@@ -34,47 +41,54 @@ function nextSong(n, t){
     song[songNumber-1].currentTime = 0;
     song[songNumber-1].style.display = "block";
     song[songNumber-1].volume=t;
-    if(context)preparation(song[songNumber-1]);
 }
 function playSong(){
     let song=document.getElementsByClassName("audio");
-    if(!context){
-        makeContext();
-        preparation();
-    }
     if(song[songNumber-1].paused){
-        debugger;
-        song[songNumber-1].play();
-        loop();
+         visualiseAndPLay(song[songNumber-1]);
     }else{
         song[songNumber-1].pause();
     }
 
-
-
 }
-function preparation(){
-    debugger;
-    let song=document.getElementsByClassName("audio");
-    analyser=context.createAnalyser();
-    src=context.createMediaElementSource(song[songNumber-1]);
-    src.connect(analyser);
-    src.connect(context.destination);
 
-}
-function loop(){
-    let song=document.getElementsByClassName("audio");
-    let circle=document.getElementsByClassName("circle");
-    if(!song[songNumber-1].paused){
-        window.requestAnimationFrame(loop);
+function visualiseAndPLay(song){
+    debugger
+    const audio1=song;
+    if(!audioCtx)
+        getContext();
+    audio1.play().then(r => (console.log('play')));
+    audioSrc=audioCtx.createMediaElementSource(audio1);
+    analyser=audioCtx.createAnalyser();
+    audioSrc.connect(analyser);
+    analyser.connect(audioCtx.destination);
+    analyser.fftSize=64;
+    const bufferLength=analyser.frequencyBinCount;
+    const dataArray=new Uint8Array(bufferLength);
+    const barWidth=canvas.width/bufferLength;
+    let barHeight;
+    let x;
+    function animate(){
+        x=0;
+        ctx.clearRect(0,0, canvas.width, canvas.height);
+        analyser.getByteFrequencyData(dataArray);
+        drawVisualiser(bufferLength,x,barWidth,barHeight, dataArray)
+        requestAnimationFrame(animate);
     }
-    array = new Uint8Array(analyser.frequencyBinCount);
-    analyser.getByteFrequencyData(array);
+    animate();
+};
 
-    circle.minHeight = (array[40])+"px";
-    circle.width =  (array[40])+"px";
+function drawVisualiser(bufferLength,x,barWidth,barHeight, dataArray){
+    for(let i=0; i<bufferLength; i++){
+        barHeight=dataArray[i];
+        const red=i*barHeight/20;
+        const green=i*4;
+        const blue=barHeight/4;
+        ctx.fillStyle='rgb('+red+','+green+','+blue+')';
+        ctx.fillRect(x,canvas.height-barHeight, barWidth, barHeight);
+        x+=barWidth;
+    }
 }
-
 // Thumbnail image controls
 function currentSlide(n) {
     showSlides(slideIndex = n);

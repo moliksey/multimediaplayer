@@ -2,9 +2,10 @@ let slideIndex = 1;
 let songNumber=1
 let timer=5000;
 let timerId;
-const file=document.getElementById('fileupload');
+let mediaSource=[];
+//const file=document.getElementById('fileupload');
 const play=document.getElementById('play');
-let audioCtx
+let audioCtx;
 function getContext(){
     audioCtx =new(window.AudioContext||window.webkitAudioContext)();
     console.log(audioCtx);}
@@ -58,7 +59,10 @@ function visualiseAndPLay(){
     if(!audioCtx)
         getContext();
     audio1.play().then(r => (console.log('play')));
-    audioSrc=audioCtx.createMediaElementSource(audio1);
+    audioSrc=mediaSource[songNumber-1] || audioCtx.createMediaElementSource(audio1);
+    if(!mediaSource[songNumber-1]){
+        mediaSource[songNumber-1]=audioSrc;
+    }
     analyser=audioCtx.createAnalyser();
     audioSrc.connect(analyser);
     analyser.connect(audioCtx.destination);

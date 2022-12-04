@@ -120,7 +120,7 @@ function switchVolume(n){
 function drawVisualiser(bufferLength,x,barWidth,barHeight, dataArray){
     for(let i=0; i<bufferLength; i++){
         barHeight=dataArray[i];
-        const red=i*barHeight/4;
+        const red=i*barHeight/2;
         const green=i*4;
         const blue=barHeight;
         ctx.fillStyle='rgb('+red+','+green+','+blue+')';
